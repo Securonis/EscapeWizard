@@ -217,12 +217,12 @@ class EscapeWizard(QMainWindow):
             elif trace_type == "logs":
                 subprocess.run(['bleachbit', '--clean', 'system.logs system.log'])
             elif trace_type == "clipboard":
-                subprocess.run(['xsel', '-c'])  # Linux clipboard temizleme
+                subprocess.run(['xsel', '-c']) 
             elif trace_type == "thumbnails":
                 subprocess.run(['bleachbit', '--clean', 'thumbnails.*'])
             
             self.progress_bar.setValue(100)
-            QTimer.singleShot(1000, self.progress_bar.hide)  # 1 saniye sonra progress bar'ı gizle
+            QTimer.singleShot(1000, self.progress_bar.hide) 
             self.show_success_message(f"{trace_type.capitalize()} traces deleted successfully!")
         except Exception as e:
             self.progress_bar.hide()
@@ -234,7 +234,7 @@ class EscapeWizard(QMainWindow):
             self.progress_bar.show()
             
             subprocess.run(['bleachbit', '--clean', 'system.* browser.* network.* tmp.* memory.* thumbnails.* downloads.* recent_documents.* system.logs'])
-            subprocess.run(['xsel', '-c'])  # Clipboard'ı da temizle
+            subprocess.run(['xsel', '-c']) 
             
             self.progress_bar.setValue(100)
             QTimer.singleShot(1000, self.progress_bar.hide)
