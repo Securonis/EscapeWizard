@@ -9,10 +9,10 @@ from PyQt5.QtGui import QIcon, QPixmap, QFont, QColor, QPalette
 from PyQt5.QtCore import Qt, QSize, QTimer
 import subprocess
 
-class EscapeWizard(QMainWindow):
+class Wizard(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("Escape Wizard")
+        self.setWindowTitle("Wizard")
         self.setFixedSize(700, 500)
         self.setStyleSheet("""
             QMainWindow {
@@ -62,7 +62,7 @@ class EscapeWizard(QMainWindow):
         main_layout.setSpacing(10)
         
         # Başlık
-        title_label = QLabel("Escape Wizard")
+        title_label = QLabel("Wizard")
         title_label.setAlignment(Qt.AlignCenter)
         title_label.setStyleSheet("""
             font-size: 24px;
@@ -75,7 +75,7 @@ class EscapeWizard(QMainWindow):
         main_layout.addWidget(title_label)
         
   
-        desc_label = QLabel("Escape Wizard is a simple GUI tool for clearing system traces.")
+        desc_label = QLabel("Wizard is a simple GUI tool for clearing system traces.")
         desc_label.setAlignment(Qt.AlignCenter)
         desc_label.setStyleSheet("""
             color: #cccccc;
@@ -181,7 +181,7 @@ class EscapeWizard(QMainWindow):
         buttons_frame.setLayout(grid_layout)
         main_layout.addWidget(buttons_frame)
         
-        # Buton bağlantıları
+ 
         self.system_button.clicked.connect(lambda: self.delete_traces("system"))
         self.cache_button.clicked.connect(lambda: self.delete_traces("cache"))
         self.network_button.clicked.connect(lambda: self.delete_traces("network"))
@@ -222,7 +222,7 @@ class EscapeWizard(QMainWindow):
                 subprocess.run(['bleachbit', '--clean', 'thumbnails.*'])
             
             self.progress_bar.setValue(100)
-            QTimer.singleShot(1000, self.progress_bar.hide) 
+            QTimer.singleShot(1000, self.progress_bar.hide)  
             self.show_success_message(f"{trace_type.capitalize()} traces deleted successfully!")
         except Exception as e:
             self.progress_bar.hide()
@@ -260,6 +260,6 @@ class EscapeWizard(QMainWindow):
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     app.setStyle('Fusion')
-    window = EscapeWizard()
+    window = Wizard()
     window.show()
     sys.exit(app.exec_()) 
